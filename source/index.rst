@@ -27,6 +27,7 @@ Indices and tables
    :caption: User Documentation
 
    Introduction
+   WhatIsCC
    gettingstarted
    
    
