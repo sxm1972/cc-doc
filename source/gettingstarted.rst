@@ -65,11 +65,12 @@ Clicking the link of Outage (Red) or Partial Outage available in the Historical 
 Configuring Cloud Credentials
 -----------------------------
 
-RLCatalyst Command Centre gives you the ability to view all your cloud assets (spanning across providers and accounts) in one place. These assets include:  
-  Virtual Machines  
-  ELBs  
-  Security Groups  
-  Networks  
+RLCatalyst Command Centre gives you the ability to view all your cloud assets (spanning across providers and accounts) in one place. These assets include
+ 
+  * Virtual Machines  
+  * ELBs  
+  * Security Groups  
+  * Networks  
   
 Configure your Cloud Account Details in the Command Centre Settings to view all your cloud assets in one place. Command Centre collects the information from the configured cloud account periodically. You can configure the interval in which this information refreshes.   
 
@@ -80,31 +81,42 @@ In Provider Settings, we have categorized the providers based on their services.
 .. image:: images/AddProvider.png
 
 Command Center will support for following Cloud Account providers.
-  Microsoft Azure
-  AWS
-  Google Cloud
+  * Microsoft Azure
+  * AWS
+  * Google Cloud
 
 **To configure a cloud account**  
  
- 
+  1.    Click on the Settings icon in the top bar
   2.	Click on the Provider Settings tab  
   3.	Click + button and add your cloud account credentials in Settings with the details captured in Appendix A. Example provided below is for a Microsoft Azure account. 
 
-| Field                       | Instructions                                           |
-|-----------------------------|--------------------------------------------------------|
-| Account Name                | Enter a Friendly name                                  |
-| Vendor                      | Choose Azure                                           |
-| Time Zone                   | Choose IST                                             |
-| Authentication Type         | Choose OAuth                                           |
++-----------------------------+---------------------------------------------------------------------------------+  
+| Field                       | Instructions                                                                    |
++=============================+=================================================================================+
+| Account Name                | Enter a Friendly name                                                           |
++-----------------------------+---------------------------------------------------------------------------------+
+| Vendor                      | Choose Azure                                                                    |
++-----------------------------+---------------------------------------------------------------------------------+
+| Time Zone                   | Choose IST                                                                      |
++-----------------------------+---------------------------------------------------------------------------------+
+| Authentication Type         | Choose OAuth                                                                    |
++-----------------------------+---------------------------------------------------------------------------------+
 | Client ID                   | Enter the Client ID of your Azure application E.g.: 9812d575-dja-4b48-8434-hdgh |
-| Client Secret               | Enter the Secret key of your Azure Application         |
-| Grant Type                  | Enter the text ‘client credentials’                    |
-| Resource                    | https://management.azure.com/                          |
-|                             |                                                        |
-| Subscription ID             | Enter the Azure subscription ID                        |
-| Tenant ID                   | Enter the Azure Tenant ID                              |
-| Schedule                    | Enter the Time Interval for collecting data from Cloud |
-| Repeat                      | Choose the Interval Type – Minutes/Hourly              |
++-----------------------------+---------------------------------------------------------------------------------+
+| Client Secret               | Enter the Secret key of your Azure Application                                  |
++-----------------------------+---------------------------------------------------------------------------------+
+| Grant Type                  | Enter the text ‘client credentials’                                             |
++-----------------------------+---------------------------------------------------------------------------------+
+| Resource                    | https://management.azure.com/                                                   |
++-----------------------------+---------------------------------------------------------------------------------+                                                | Subscription ID             | Enter the Azure subscription ID                                                 |
++-----------------------------+---------------------------------------------------------------------------------+
+| Tenant ID                   | Enter the Azure Tenant ID                                                       |
++-----------------------------+---------------------------------------------------------------------------------+
+| Schedule                    | Enter the Time Interval for collecting data from Cloud                          |
++-----------------------------+---------------------------------------------------------------------------------+
+| Repeat                      | Choose the Interval Type – Minutes/Hourly                                       |
++-----------------------------+---------------------------------------------------------------------------------+
 
 *Note: To get the Client ID and Client Secret key, create an application in Azure and set the Role as Reader. To set the Role, Go to Subscription->Resource Group->Access Control(IAM)->Add>Permissions->Add Reader Permission*
 
@@ -163,18 +175,31 @@ Configuring a Catalyst account allows you to access the summary of BOT runs on y
  1.    Click on the Settings icon in the top bar.    
  2.    Click on the Provider Settings tab   
  3.    Click + button and add your catalyst account credentials in Settings with the details
+ 
+ 
 
-| Field                       | Instructions                                           |
-|-----------------------------|--------------------------------------------------------|
-| Account Name                | Enter a Friendly name                                  |
-| Vendor                      | Choose RLCatalyst                                      |
-| Time Zone                   | Choose IST                                             |
-| Authentication Type         | Password                                               |
-| Host                        | URL to your RLCatalyst Instance E.g.:https://neo.rlcatalyst.com/ |
-| UserName                    | Enter UserName         | 
-| Password                    | Enter Password                                         |
-| Schedule                    | Enter the Time Interval for collecting data from Catalyst|
-| Repeat                      | Choose the Interval Type-Minutes/Hourly                | 
++--------------------+-------------------------------------------------------------------+
+| Field              | Instructions                                                      | 
++====================+========================+==========================================+
+| Account Name       | Enter a Friendly name                                             | 
++--------------------+-------------------------------------------------------------------+ 
+| Vendor             | Choose RLCatalyst                                                 | 
++--------------------+-------------------------------------------------------------------+
+| Time Zone          | Choose IST                                                        |
++--------------------+-------------------------------------------------------------------+
+|Authentication Type |Password                                                           |
++--------------------+-------------------------------------------------------------------+                                        
+| Host               | URL to your RLCatalyst Instance E.g.:https://neo.rlcatalyst.com/  |
++--------------------+-------------------------------------------------------------------+
+| UserName           | Enter UserName                                                    |
++--------------------+-------------------------------------------------------------------+ 
+| Password           | Enter Password                                                    |
++--------------------+-------------------------------------------------------------------+
+| Schedule           | Enter the Time Interval for collecting data from Catalyst         |
++--------------------+-------------------------------------------------------------------+
+| Repeat             | Choose the Interval Type-Minutes/Hourly                           | 
++--------------------+-------------------------------------------------------------------+
+
 
 .. image:: images/AddRLCatalystAccount.jpg
 
@@ -189,7 +214,7 @@ RLCatalyst Command Centre uses monitoring agents that run on the individual mach
 
 RLCatalyst installs monitoring agents in the target nodes on which the Business Services are running. This is done via a bootstrapping process which will install system monitoring, app monitoring and services monitoring agents into the instances. Once installed, the real-time monitoring alerts will be available under RLCatalyst Command Centre→Services and RLCatalyst Command Centre→Monitoring Tools .
 
- 1.    Login to <customer name>neo.rlcatalyst.com with the given credentials ● Go to Work zone.    
+ 1.    Login to <customer name>neo.rlcatalyst.com with the given credentials -> Go to Work zone.    
  2.	   Click on the tree on the left to choose the Organization, Business Group, Project and   
         Environment. By default, there will be  
 		o Organization with the customer name   
@@ -229,11 +254,17 @@ Procedure
 	   E.g.: sudo ./agent_installation.sh petclinic petclinic relevance http://18.219.197.233:8080/petclinic/ 20s 
 
 
++---------------------------+----------------------------------------------------------------------------------------------------+	   
 | Parameter1                | Service name<A friendly name for the service .This will be your Business Service>                  |
++---------------------------+----------------------------------------------------------------------------------------------------+
 | Parameter2                | tag application name <Name of this application e.g. MongoDB on which your Business Service depends>|
++---------------------------+----------------------------------------------------------------------------------------------------+
 | Parameter3                | tag tenant id<Company Name for this Tenat>                                                         |
++---------------------------+----------------------------------------------------------------------------------------------------+
 | Parameter4                | URL                                                                                                |
-| Parameter5                | Checks interval e.g. 60s                                                                           |	   
++---------------------------+----------------------------------------------------------------------------------------------------+
+| Parameter5                | Checks interval e.g. 60s                                                                           |
++---------------------------+----------------------------------------------------------------------------------------------------+	   
 
 You should now have the monitoring agents running on your machine.
        
