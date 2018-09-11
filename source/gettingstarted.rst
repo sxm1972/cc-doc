@@ -62,7 +62,8 @@ Clicking the link of Outage (Red) or Partial Outage available in the Historical 
 
 .. image:: images/HistoricalStatusDrillDownView.png
 
-**Configuring Cloud Credentials**
+Configuring Cloud Credentials
+-----------------------------
 
 RLCatalyst Command Centre gives you the ability to view all your cloud assets (spanning across providers and accounts) in one place. These assets include:  
   Virtual Machines  
@@ -83,8 +84,9 @@ Command Center will support for following Cloud Account providers.
   AWS
   Google Cloud
 
-To configure a cloud account:  
-  1.	Click on the Settings icon in the top bar.   
+**To configure a cloud account**  
+ 
+ 
   2.	Click on the Provider Settings tab  
   3.	Click + button and add your cloud account credentials in Settings with the details captured in Appendix A. Example provided below is for a Microsoft Azure account. 
 
@@ -107,3 +109,137 @@ To configure a cloud account:
 *Note: To get the Client ID and Client Secret key, create an application in Azure and set the Role as Reader. To set the Role, Go to Subscription->Resource Group->Access Control(IAM)->Add>Permissions->Add Reader Permission*
 
 .. image:: images/AddProviderAzure.png
+
+Viewing Cloud Assets
+--------------------
+
+From the menu at the top left of the top bar, choose CMDB. Cloud assets will be listed once the Cloud Credentials are added in Settings. From the dropdown choose the cloud account and get the summary view and list view as shown in screenshot. The CMDB lists the following:  
+  1.    Virtual machines    
+  2.    Disks   
+  3.    Security Groups   
+  4.    Network Cluster   
+  5.    Compute Databases   
+  6.    Load Balancers   
+
+If the assets are tagged, the same information will be fetched into CMDB also.   
+You can filter the CMDB assets view by clicking on buttons “All, Running, Monitoring “ which is available in the right corner just above the table. By default, ALL filter should be selected.  
+
+ALL: displays all the nodes (Active & Inactive) 
+
+.. image:: images/CMDBViewOfCloudAssets(ALL).jpg
+
+Running: displays all the running nodes   
+
+.. image:: images/CMDBViewOfCloudAssets(Running).jpg
+
+Monitoring: displays the monitoring nodes health services, Node, ELK Log Icons.  
+Clicking on Services, Node & ELK Log Icons shall take the user to respective pages.
+
+.. image:: images/CMDBViewOfCloudAssets(Monitoring).jpg 
+
+Configuring Business Services
+-----------------------------
+
+Add Business Services to be monitored in the dashboard view. Each service added will be monitored in the predefined interval. The Business Services will appear as cards in the dashboard each showing the latest status of the service. Clicking on a card will show you a drill down view of the service with the alerts related to the service and the outage trends. Use the Business Services information captured in Appendix A as you follow the steps below. 
+
+**To configure a business service**
+
+ 1.	    Click the + icon in the dashboard view to bring up the Add Service dialog.
+ 2.	    Add the Business Service URL (should be accessible from the Command Centre)   
+ 3.	    Enter an alias or a name of the service. This will be the name displayed on the card in the dashboard.   
+ 4.	    Provide an email ID to which alerts will be send during Outages. You can provide more than one email ID separated by commas.   
+ 5.	    A verification e-mail will be sent to each email ID provided above. Clicking on the link in the email will confirm the email ID for receiving emails.   
+ 6.	    Check the box to get email notifications for linked services 
+
+.. image:: images/AddBusinessService.jpg 
+
+Configuring the Catalyst Account
+--------------------------------
+
+Configuring a Catalyst account allows you to access the summary of BOT runs on your dashboard page. It also enables the Remediation and Auto-Remediation features. 
+
+**To configure a catalyst account**
+
+ 1.    Click on the Settings icon in the top bar.    
+ 2.    Click on the Provider Settings tab   
+ 3.    Click + button and add your catalyst account credentials in Settings with the details
+
+| Field                       | Instructions                                           |
+|-----------------------------|--------------------------------------------------------|
+| Account Name                | Enter a Friendly name                                  |
+| Vendor                      | Choose RLCatalyst                                      |
+| Time Zone                   | Choose IST                                             |
+| Authentication Type         | Password                                               |
+| Host                        | URL to your RLCatalyst Instance E.g.:https://neo.rlcatalyst.com/ |
+| UserName                    | Enter UserName         | 
+| Password                    | Enter Password                                         |
+| Schedule                    | Enter the Time Interval for collecting data from Catalyst|
+| Repeat                      | Choose the Interval Type-Minutes/Hourly                | 
+
+.. image:: images/AddRLCatalystAccount.jpg
+
+When you add a Catalyst account, BOTs Summary panel will appear on the dashboard. 
+
+Installing the Monitoring Agents
+--------------------------------
+
+RLCatalyst Command Centre uses monitoring agents that run on the individual machines being monitored. Monitoring Agents can be installed manually or via an automated way through RLCatalyst.
+
+**Install Agents through RLCatalyst**
+
+RLCatalyst installs monitoring agents in the target nodes on which the Business Services are running. This is done via a bootstrapping process which will install system monitoring, app monitoring and services monitoring agents into the instances. Once installed, the real-time monitoring alerts will be available under RLCatalyst Command Centre→Services and RLCatalyst Command Centre→Monitoring Tools .
+
+ 1.    Login to <customer name>neo.rlcatalyst.com with the given credentials ● Go to Work zone.    
+ 2.	   Click on the tree on the left to choose the Organization, Business Group, Project and   
+        Environment. By default, there will be  
+		o Organization with the customer name   
+        o Business Group ‘DevOps’ 
+		o Project ‘Demo Project’   
+        o Environments - <customer name>_EVL,  
+          <customer name>_DEV,   
+          <customer name>_QA, 
+		  <customer name>_PROD, 
+		  <customer name>_DEVOPS   
+ 3.    Choose one of the environments   
+ 4.    Click on ‘Import’ button. Enter the IP address of the instance, credentials and Import. The agents will be installed automatically when imported.
+
+*Note: The checks added for monitoring your services in Consul should be tagged/grouped properly with the business service name that has to be listed in the Dashboard View. RL Team will provide necessary help to get the service checks added* 
+
+Installing monitoring agents on a Linux machine using a downloaded script   
+Note: Perform the following steps on each machine listed under each Business Service in Appendix A. 
+
+Prerequisites :
+
+ 1.	   To configure a machine or VM for monitoring with Command Center the following ports need to be opened in the firewall: 8301 ,8302 ,8500,8600, 3030   
+ 2.	   You need sudo privileges to install the clients   
+ 3.	   The machine should have a public IP address to communicate with the monitoring servers. 
+
+Procedure
+
+ 1.    Download the agent_ installation.tar.gz file from the following URL:
+       https://s3.us-east-2.amazonaws.com/cookbookslist/v2.6/linux-agent-installation.zip  
+ 2.    Extract the agent_installation.zip file by the following command
+       unzip linux-agent-installation.zip 
+ 3.    On successful extraction, execute the following command to give the privileges to run the script
+       chmod 755 linux-agent-installation.sh   
+ 4.    Execute the script with the following command will install monitoring clients
+       sudo ./linux-agent-installation.sh   
+ 5.    To create the Consul checks, pass the parameters using following command 	   
+       sudo ./agent_installation.sh parameter1 parameter2 parameter3 parameter4 parameter5
+	   E.g.: sudo ./agent_installation.sh petclinic petclinic relevance http://18.219.197.233:8080/petclinic/ 20s 
+
+
+| Parameter1                | Service name<A friendly name for the service .This will be your Business Service>                  |
+| Parameter2                | tag application name <Name of this application e.g. MongoDB on which your Business Service depends>|
+| Parameter3                | tag tenant id<Company Name for this Tenat>                                                         |
+| Parameter4                | URL                                                                                                |
+| Parameter5                | Checks interval e.g. 60s                                                                           |	   
+
+You should now have the monitoring agents running on your machine.
+       
+	   
+
+
+
+
+ 
