@@ -29,7 +29,8 @@ Indices and tables
    Introduction
    WhatIsCC
    gettingstarted
-   
+   features
+   Appendix
    
 
 
