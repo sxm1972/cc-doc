@@ -233,7 +233,7 @@ RLCatalyst installs monitoring agents in the target nodes on which the Business 
 Installing monitoring agents on a Linux machine using a downloaded script   
 Note: Perform the following steps on each machine listed under each Business Service in Appendix A. 
 
-Prerequisites :
+Prerequisites 
 
  1.	   To configure a machine or VM for monitoring with Command Center the following ports need to be opened in the firewall: 8301 ,8302 ,8500,8600, 3030   
  2.	   You need sudo privileges to install the clients   
@@ -243,12 +243,24 @@ Procedure
 
  1.    Download the agent_ installation.tar.gz file from the following URL:
        https://s3.us-east-2.amazonaws.com/cookbookslist/v2.6/linux-agent-installation.zip  
+	   
+.. image:: images/DownloadLinuxAgentInstallation.jpg	   
+ 
  2.    Extract the agent_installation.zip file by the following command
        unzip linux-agent-installation.zip 
+	   
+.. image:: images/ExtractingtheMonitoringAgentInstallers.jpg
+	   
  3.    On successful extraction, execute the following command to give the privileges to run the script
-       chmod 755 linux-agent-installation.sh   
+       chmod 755 linux-agent-installation.sh  
+
+.. image:: images/PreparingTheMonitoringAgentInstallers.jpg
+	   
  4.    Execute the script with the following command will install monitoring clients
-       sudo ./linux-agent-installation.sh   
+       sudo ./linux-agent-installation.sh 
+
+.. image:: images/RunningTheMonitoringAgentInstallers.jpg
+	   
  5.    To create the Consul checks, pass the parameters using following command 	   
        sudo ./agent_installation.sh parameter1 parameter2 parameter3 parameter4 parameter5
 	   E.g.: sudo ./agent_installation.sh petclinic petclinic relevance http://18.219.197.233:8080/petclinic/ 20s 
@@ -268,6 +280,175 @@ Procedure
 
 You should now have the monitoring agents running on your machine.
        
+Install monitoring agents on a Windows machine through a downloaded script    
+Note: Perform the following steps on each machine listed under each Business Service in Appendix A
+
+Prerequisites 
+
+ 1.    To configure a machine or VM for monitoring with Command Center the following ports need to be opened in the firewall: 8301 ,8302 ,8500,8600, 3030    
+ 2.    You need to run PowerShell as Administrator (right-click and choose “Run As Administrator”)    
+ 3.	   The machine should have a public IP address to communicate with the monitoring servers. 
+
+Procedure
+
+ 1.    Download the agent_ installation.tar.gz file from the following URL: 
+       https://s3.us-east-2.amazonaws.com/cookbookslist/v2.6/windows-agent-installation.zip
+
+.. image:: images/DownloadAgentInstallation.jpg	
+
+ 2.    Extract the script from the archive
+ 
+.. image:: images/ExtractScript.jpg
+ 
+ 3.    Set the directory to the extracted folder and run the script using the following command    
+       PowerShell -ExecutionPolicy bypass ./windows-agent-installation.ps1
+	   
+.. image:: images/RunningTheAgentInstallation.jpg
+
+ 4.   The script should install the Monitoring agents. Verify that the agents are running by typing the following command 
+      ps | findstr sensu    
+
+      It should show the monitoring agent running    
+      Similarly verify ps | findstr consul    
+
+**Install monitoring agents on a Windows machine manually**	 
+
+Prerequisites
+
+ 1.    To configure a machine or VM for monitoring with Command Center the following ports need to be opened in the firewall: 8301 ,8302 ,8500,8600, 3030    
+ 2.    You need Administrator privileges to install the clients    
+ 3.    The machine should have a public IP address to communicate with the monitoring servers.    
+    
+Procedure
+   
+ 1.    Choose the Chef Windows package based on the Operating System (Ex: Windows 2012)  
+       & Architecture (Ex: X86_64) from the below link in the required/available windows machine    
+       https://downloads.chef.io/chef#windows
+	   
+.. image:: images/DownloadingChef.jpg
+
+ 2.    Install the downloaded windows package in the Windows machine on this location and it will create a chef directory. E.g.: C:// 
+
+.. image:: images/InstallingChef.jpg
+
+.. image:: images/VerifyingChefInstallation.jpg
+
+ 3.    Create a directory with name “cookbooks” in “c:/chef” (optional).  
+
+.. image:: images/ChefCookbookLocation.jpg
+
+ 4.    Download the following files for sensu and consul clients from the s3 bucket.  
+       https://s3.us-east-2.amazonaws.com/cookbookslist/v2.6/consul-client.zip  
+	   https://s3.us-east-2.amazonaws.com/cookbookslist/v2.6/sensu-client.zip   
+ 
+ 5.    Please unzip the following files of s3 files and examples files should be like     
+       E.g.: C://chef/cookbooks/ consul-client    
+             C://chef/cookbooks/ sensu-client   
+    
+.. image:: images/ExtractingAgentInstallers.jpg
+
+.. image:: images/VerifyingTheExtractedInstallers.jpg
+
+ 6.    Open the command prompt and navigate to the following location 
+       C:\chef\cookbooks\  
+
+ 7.    Run the following commands to install the consul and sensu clients
+       chef-client -z -o "recipe[sensu-client]"  
+	   chef-client  -z -o "recipe[consul-client]"    
+
+.. image:: images/RunningTheMonitoringAgentInstallers_Consul_Sensu.jpg
+ 
+ 8.    After the installation of clients, we can verify the services with names “consul and sensuclient” or the other way testing the above-mentioned ports     by “netstat” command. 
+ 
+.. image:: images/VerifyingConsulAgent.jpg
+
+.. image:: images/VerifyingSensuAgent.jpg 
+
+Aggregated Alerts 
+-----------------
+
+Once the services are added and agents are installed, the alerts will be aggregated from multiple monitoring sources by the respective collectors.  Alerts are currently aggregated from
+
+  * Ping BOTs – Checks Availability of Services    
+  * Consul – Monitors Services    
+  * Sensu – System Monitoring
+  
+When the service goes down or if an Outage happens, the corresponding card on the   dashboard view will turn Red.   
+When any of the dependent services has a problem related to BSM will be Yellow.  Clicking on the card will give details on linked services and the associated nodes
+
+.. image:: images/OutagesasRedCardsOnDashBoard.jpg
+
+.. image:: images/DrilldownViewfromCard.jpg
+
+Click on the Alerts button to see the detailed Alerts from multiple sources (Pingbot, Consul & Sensu). Alerts aggregated by Node or Service in the Alerts Monitor screen.
+ 
+Service alerts are shown on the Services tab of the Alert Monitor.  
+    
+.. image:: images/ServiceAlerts.jpg 
+
+System alerts are shown in the Nodes tab of the Alert Monitor.  
+
+.. image:: images/NodeAlerts.jpg
+
+The dependent services of the Business Service and their health can be viewed under the Linked services section of the same page.    
+
+The dependent nodes of the Business Service and their health can be viewed under the Nodes section of the same page.    
+
+Click on the Outages tab to get a detailed list of all the outages detected by the system.   
+
+.. image:: images/OutageDetails.jpg
+
+Click on the Incident Id to open the associated ServiceNow ticket on the ServiceNow portal.  Click on the Incident Communication icon to send out communication about the incident with Root Cause Analysis & Category. 
+
+.. image:: images/IncidentCommunication.jpg
+
+.. image:: images/IncidentCommunication(AddSection).jpg
+
+Auto-create Incident Communications for Detection and Resolution :
+
+System automatically creates Incident Communication for application outage detection and resolution.  
+
+.. image:: images/AutoCreateIncidentCommunication.jpg
+
+Click on the Communications tab to see a timeline of incidents
+
+.. image:: images/CommunicationTimeline.jpg
+
+Command Center provides a feature called “Fault Table” to capture known problems related to a service and then uses the information to help the user to categorize the root-cause of any outage that occurs.  
+
+User can add fault to “Fault Table” by clicking on + icon which is available in the “Known Faults” table (Menu->Known Faults link-> + icon)  
+
+.. image:: images/AddKnownFault.jpg
+
+When a Root-cause identified incident communication is entered, the user can link the RCA Incident Communication to an item in the Fault Table associated to the BSM through Add Incident Communication screen.  
+
+.. image:: images/KnownFaultSelection.jpg
+
+User shall be able to navigate to the Fault Table from any outage which is linked to a fault by clicking on “Fault” link in the Outages screen.  
+
+.. image:: images/FaultsLink.jpg
+
+User can view the count of outages linked to a fault by clicking on the “Outages Linked” link in the Fault table   
+
+.. image:: images/OutagesLinked.jpg
+
+Aggregated Alerts for all services are available from the left pane menu ‘Services’.
+
+.. image:: images/AggregatedServicesAlertsView.jpg
+
+Aggregated Alerts for all servers/instances are available from the left pane menu ‘Monitoring Tools’
+
+.. image:: images/AggregatedSystemAlertsView.jpg
+
+History for all servers/instances are available from the Monitoring Tools->Clients->History    
+
+.. image:: images/HistoryOfServersandInstances.jpg
+
+Click on History Icon, to view the detailed history information regarding each client
+
+.. image:: images/HistoricalDataRelatedtoInstances.jpg
+ 
+ 
 	   
 
 
