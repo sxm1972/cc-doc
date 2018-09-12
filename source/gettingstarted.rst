@@ -362,7 +362,7 @@ Procedure
  
 .. image:: images/VerifyingConsulAgent.jpg
 
-.. image:: images/VerifyingSensuAgent.jpg 
+.. image:: images/VerifyingSensuAgent.png 
 
 Aggregated Alerts 
 -----------------
@@ -397,6 +397,9 @@ The dependent nodes of the Business Service and their health can be viewed under
 Click on the Outages tab to get a detailed list of all the outages detected by the system.   
 
 .. image:: images/OutageDetails.jpg
+
+Incident Communication
+----------------------
 
 Click on the Incident Id to open the associated ServiceNow ticket on the ServiceNow portal.  Click on the Incident Communication icon to send out communication about the incident with Root Cause Analysis & Category. 
 
@@ -447,6 +450,115 @@ History for all servers/instances are available from the Monitoring Tools->Clien
 Click on History Icon, to view the detailed history information regarding each client
 
 .. image:: images/HistoricalDataRelatedtoInstances.jpg
+
+Logging in as a landlord
+------------------------
+
+Open a browser (we recommend Chrome or Firefox). Enter the application URL provided. The login page should open. On the login page, fill the Company, User and Password fields as captured in Appendix A. Then click the Login button. You will see the landing page of the tenant created first and by choosing the tenant be able to view the data of that tenant.
+
+.. image:: images/LandlordView.jpg    
+
+Remediation
+-----------
+
+Command Center allows you to restart the service if a problem is encountered either at an underlying Node level or at a dependent service level. This feature is to give L0/L1 level support personnel a quick means of attempting to correct a problem.   
+   
+When a dependent node/service has a critical alert, you have an option to remediate the problem by clicking on the icon to restart the service which is available in the BSM drilldown view screen. The BOT would then restart the node.
+
+.. image:: images/RemediationIcon.jpg  
+
+Auto Remediation
+----------------
+
+Command Center allows you to choose to configure certain Business Services (Managed Nodes) for auto healing. Whenever an outage is detected for a BSM configured with auto-healing, the system shall then kick-off the auto-remediation process. Auto-healing shall be initiated for nodes provided are in warning or critical status.
+  
+Manual remediation shall not be available for Nodes under a BSM that is enabled for Auto-healing.  
+  
+You can opt for Auto-healing option by checking the Checkbox “Enable Auto-Remediation” which is available in the “Add Service” screen.
+
+.. image:: images/AutoRemediation.jpg
+
+Planned versus Unplanned outages
+--------------------------------
+
+The idea of this feature is to provide a capability to plan a down-time so that the availability of the Business Service shall not be affected. CommandCenter has provided a screen to enter a planned outage. This screen shall take a date-time range, the nodes that are affected and the BSMs that are affected.  
+When an outage occurs, check if the outage falls within a planned outage window. If yes, do not consider that outage in the availability calculations.  
+  
+By clicking on link “Plan Outage” which is available under the menu, application will open “Planned Outage Details “screen. By clicking on + icon you can add Plan outage for the required service.  
+
+.. image:: images/PlannedOutageDetails.jpg
+
+**Appendix A**
+
++-------------------------------+--------------------------------------------------------------------------------+
+| Registration Information                                                                                       | 
++===============================+================================================================================+
+| Name of the tenant            | This will be used to fill the Customer Name field in the registration form     | 
+                                | This field will have to be unique for each tenant configured in system                                                         
++-------------------------------+--------------------------------------------------------------------------------+ 
+| User Name                     | This will be the username with which the tenant will login                     | 
++-------------------------------+--------------------------------------------------------------------------------+
+| Password                      | This will be the initial password allocated to the tenant                      |
++-------------------------------+--------------------------------------------------------------------------------+
+|Email Address                  |Email ID which will be verified by the system during registration.              |
+                                |Ensure you have access to this e-mail ID during registration                    |
++-------------------------------+--------------------------------------------------------------------------------+                                        
+| Provider Settings                                                                                              |
++-------------------------------+--------------------------------------------------------------------------------+
+| Will an Amazon Web Services account be configured for this tenant?                                             |
++-------------------------------+--------------------------------------------------------------------------------+ 
+| AWS Access Key                |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+| AWS Secret Key                |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+| AWS Region for this account   |                                                                                | 
++-------------------------------+--------------------------------------------------------------------------------+
+|AWS Account Number             |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+|Will a Microsoft Azure account be configured for this tenant?                                                   |
++-------------------------------+--------------------------------------------------------------------------------+
+|Azure Client ID                |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+ 
+|Azure Client Secret            |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+    
+|Subscription ID                |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+|Tenant ID                      |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+   
+|Will a ServiceNow account be configured for this tenant?                                                        |    
++-------------------------------+--------------------------------------------------------------------------------+ 
+|Host                           |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+|User Name                      |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+|Password                       |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+|Will a Sensu account be configured for this tenant?                                                             |
++-------------------------------+--------------------------------------------------------------------------------+
+|Host                           |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+|User Name                      |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+|Password                       |                                                                                |
++-------------------------------+--------------------------------------------------------------------------------+
+|Business Services                                                                                               |
++-------------------------------+--------------------------------------------------------------------------------+
+|Name <Name of the service as it appears on the dashboard>                                                       |
++-------------------------------+--------------------------------------------------------------------------------+       
+|URL  < URL for the business service >                                                                           |
++--------------------+-------------------------------------------------------------------------------------------+   
+|Linked Services (if any)        |< Service1 – IP Address of node it runs on,                                   |  
+                                    Service2 – IP Address of node it runs on,                                    |
+                                    Service3 – IP Address of node it runs on >                                   |
++--------------------+-------------------------------------------------------------------------------------------+							  
+|Nodes (VMs or Machines)         | <FQDN of Node1,    FQDN of Node 2, FQDN of Node3>                            |
++--------------------+-------------------------------------------------------------------------------------------+  
+							  
+  
+
+
+
+
  
  
 	   
