@@ -2,10 +2,10 @@ Getting Started
 ===============
 You will be provided the following pieces of information in your starter kit:
 
-URL:_______<application URL>________________________________
-Company: _________________________________________________
-User: _____________________________________________________
-Password: _________________________________________________
+|URL     |      application url        |
+|Company |                             |
+|User    |                             |
+|Password|                             |
 
 Keep this information handy as you go through this guide and configure your system. 
 
