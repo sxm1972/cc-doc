@@ -2,19 +2,26 @@ Getting Started
 ===============
 You will be provided the following pieces of information in your starter kit:
 
++========+=============================+
 |URL     |      application url        |
++--------+-----------------------------+
 |Company |                             |
++--------+-----------------------------+
 |User    |                             |
++--------+-----------------------------+
 |Password|                             |
++--------+-----------------------------+
 
 Keep this information handy as you go through this guide and configure your system. 
 
-**Planning your deployment**
+Planning your deployment
+------------------------
 
 RLCatalyst Command Center is capable of multi-tenancy. Using the same instance of the software, you can create several tenants. Each tenant can configure his own machines for monitoring. Each tenant can also configure his own cloud accounts and get an independent view of his cloud assets.
 The landlord can create new tenants in the system.
 
-**Creating your first tenant**
+Creating your first tenant
+--------------------------
 
 To plan the creation of a new tenant, use the planning sheet in Appendix A to collect all the information required upfront. Keep the sheet handy as you go through the following steps.
 
@@ -47,20 +54,6 @@ Open a browser (we recommend Chrome or Firefox). Enter the application URL provi
   BOT’s Summary (Total)- We need to configure a Catalyst Account to view the count of Bot’s summary.  
 
 .. image:: images/dashboardBSMView.png
-
-**Historical BSM Health Indicator**
-
-Historical BSM Health Indicator gives you the ability to see the trend of the BSM over last 30 days as a consolidated view. Using this view, the user can then navigate to specific outage view of interest.  
-  
-The view can be available with a “Trend Icon” on Top-Left of BSM View and clicking that can show the Consolidated status of all BSM over last 30 days with appropriate status.  
-  
-.. image:: images/HistoricalStatusTrendIcon.png
-
-.. image:: images/HistoricalStatusView.png
-
-Clicking the link of Outage (Red) or Partial Outage available in the Historical Status Dashboard will take the user to the appropriate Outage Drill-down page  
-
-.. image:: images/HistoricalStatusDrillDownView.png
 
 Configuring Cloud Credentials
 -----------------------------

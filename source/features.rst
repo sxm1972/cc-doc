@@ -1,5 +1,20 @@
 Features
 ========
+
+Historical BSM Health Indicator
+-------------------------------
+Historical BSM Health Indicator gives you the ability to see the trend of the BSM over last 30 days as a consolidated view. Using this view, the user can then navigate to specific outage view of interest.  
+  
+The view can be available with a *Trend Icon* on Top-Left of BSM View and clicking that can show the Consolidated status of all BSM over last 30 days with appropriate status.  
+  
+.. image:: images/HistoricalStatusTrendIcon.png
+
+.. image:: images/HistoricalStatusView.png
+
+Clicking the link of Outage (Red) or Partial Outage available in the Historical Status Dashboard will take the user to the appropriate Outage Drill-down page  
+
+.. image:: images/HistoricalStatusDrillDownView.png
+
 Viewing Cloud Assets
 --------------------
 
